@@ -77,8 +77,8 @@ Vagrant.configure('2') do |config|
   # Box configuration. Configures the development environment with all required tools:
   config.vm.provision :shell, path: 'bootstrap.sh'
   custom_provisioner = File.expand_path('~/.mior-devenv')
-  george_profile = File.expand_path('~/.devenv_profile')
-  config.vm.provision 'file', source: george_profile, destination: '~/.devenv_profile' if File.exists?(george_profile)
+  devenv_profile = File.expand_path('~/.devenv_profile')
+  config.vm.provision 'file', source: devenv_profile, destination: '~/.devenv_profile' if File.exists?(devenv_profile)
   config.vm.provision 'file', source: 'bash_profile', destination: '~/.bash_profile'
   config.vm.provision :shell, path: custom_provisioner if File.exists?(custom_provisioner)
   config.vm.synced_folder Dir.home, '/home/ubuntu/shared', create: true
