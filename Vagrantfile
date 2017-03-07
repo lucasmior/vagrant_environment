@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-use_proxy = true
-url_proxy = ENV['http_proxy'] || 'http://web-proxy.corp.hp.com:8080/'
-not_proxy = 'localhost,127.0.0.1,.hpicorp.net,15.0.0.0/8,16.0.0.0/8'
+use_proxy = false
+url_proxy = ENV['http_proxy']
+not_proxy = 'localhost,127.0.0.1'
 
 private_key = File.expand_path(File.join(Dir.home, '.ssh/id_rsa'))
 public_key = File.expand_path(File.join(Dir.home, '.ssh/id_rsa.pub'))
@@ -19,7 +19,7 @@ Vagrant.configure('2') do |config|
     else
       puts '.'
       puts 'ERROR: Could not find vagrant-proxyconf plugin.'
-      puts 'INFO: This plugin is required to use this box inside HPinc network.'
+      puts 'INFO: This plugin is required to use this box with proxy network.'
       puts 'INFO: $ vagrant plugin install vagrant-proxyconf'
       puts 'ERROR: Bailing out.'
       puts '.'
@@ -41,8 +41,8 @@ Vagrant.configure('2') do |config|
 
   # Official Ubuntu 16.04 LTS (Xenial Xerus)
   config.vm.box = 'ubuntu/xenial64'
-  config.vm.define "george-devenv"
-  config.vm.hostname = "george-devenv"
+  config.vm.define "mior-devenv"
+  config.vm.hostname = "mior-devenv"
 
   # SSH configuration:
   # Ensures the vagrant user is configured to use your keypair.
@@ -76,7 +76,7 @@ Vagrant.configure('2') do |config|
 
   # Box configuration. Configures the development environment with all required tools:
   config.vm.provision :shell, path: 'bootstrap.sh'
-  custom_provisioner = File.expand_path('~/.george-devenv')
+  custom_provisioner = File.expand_path('~/.mior-devenv')
   george_profile = File.expand_path('~/.devenv_profile')
   config.vm.provision 'file', source: george_profile, destination: '~/.devenv_profile' if File.exists?(george_profile)
   config.vm.provision 'file', source: 'bash_profile', destination: '~/.bash_profile'
@@ -85,7 +85,7 @@ Vagrant.configure('2') do |config|
   config.vm.network :public_network, bridge: 'eth0'
 
   config.vm.provider :virtualbox do |vb|
-    vb.name = 'george-devenv'
+    vb.name = 'mior-devenv'
     vb.customize ['modifyvm', :id, '--memory', '2048']
     vb.customize ['modifyvm', :id, '--cpus', '1']
     vb.customize ['modifyvm', :id, '--ioapic', 'on']

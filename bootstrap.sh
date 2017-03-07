@@ -42,28 +42,20 @@ unzip awscli-bundle.zip
 rm awscli-bundle.zip
 rm -rf awscli-bundle
 
-# Installing and configuring Kubernetes kubectl:
-# -------------------------------------------------------------------------
-
-curl -s -L -o /usr/local/bin/kubectl https://s3-us-west-2.amazonaws.com/george-downloads/kubectl
-chmod 0755 /usr/local/bin/kubectl
-
 # Creating symlinks to config files:
 # -------------------------------------------------------------------------
 
-ln -s /home/ubuntu/shared/.kube /home/ubuntu/.kube
 ln -s /home/ubuntu/shared/.aws /home/ubuntu/.aws
 ln -s /home/ubuntu/shared/.gitconfig /home/ubuntu/.gitconfig
 chmod 0600 /home/ubuntu/.ssh/id_rsa
 
 echo ''
 echo ''
-echo 'George development environment successfully created.'
+echo 'Mior development environment successfully created.'
 echo '------------------------------------------------------------------------'
 echo 'Your home directory has been mapped to /home/ubuntu/shared'
 echo 'The following config dirs and files have been mapped to /home/ubuntu:'
 echo '  * ~/.aws'
-echo '  * ~/.kube'
 echo '  * ~/.ssh'
 echo '  * ~/.gitconfig'
 echo ''
