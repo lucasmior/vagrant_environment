@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       --env-file <(env | grep '^VAULT') \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $PWD:/usr/src/myapp \
+       -w /usr/src/myapp \
+       --entrypoint=vault \
+       vault:0.8.2 "$@"

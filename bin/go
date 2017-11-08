@@ -1,0 +1,14 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -e GOOS=${GOOS:-linux} \
+       -e GOARCH=${GOARCH:-amd64} \
+       -e GOPATH=/go:/root/go:/usr/src/myapp \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $HOME/go/src:/go/src \
+       -v $PWD:/usr/src/myapp \
+       -w /usr/src/myapp \
+       golang:1.8 go "$@"

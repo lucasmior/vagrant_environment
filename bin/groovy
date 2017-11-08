@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -v ~/shared/.grapes:/graperoot \
+       -v $PWD:/source \
+       webratio/groovy groovy "$@"

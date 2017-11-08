@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $HOME/.gems:/usr/local/bundle \
+       -v $PWD:/usr/src/myapp \
+       -w /usr/src/myapp \
+       ruby:2.3 ruby "$@"

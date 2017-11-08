@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $PWD:/work \
+       -v ~/shared/.berkshelf/:/root/.berkshelf/ \
+       -v ~/shared/.chef/:/root/.chef/ \
+       -w=/work \
+       chef/chefdk berks "$@"

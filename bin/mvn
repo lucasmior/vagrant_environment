@@ -1,0 +1,9 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -v ~/shared/.m2/:/root/.m2/ \
+       -v $PWD:/app \
+       -w /app \
+       maven:3.3.9-jdk-8-alpine mvn "$@"

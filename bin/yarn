@@ -1,0 +1,13 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $PWD:/app \
+       -v ~/shared/.npm/yarn-cache/:/root/.npm/ \
+       -v ~/shared/.npm/.npmrc:/usr/local/.npmrc \
+       -v ~/shared/.npm/.yarnrc:/usr/local/.yarnrc \
+       -w /app \
+       node:6-alpine yarn "$@"

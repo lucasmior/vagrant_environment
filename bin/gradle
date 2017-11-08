@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DOCKER_IMAGE="niaquinto/gradle:3.3"
+
+docker run \
+       --rm \
+       -it \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v ~/shared/.m2:/root/.m2 \
+       -v ~/shared/.gradle:/root/.gradle \
+       -v $PWD:/usr/bin/app:rw \
+       $DOCKER_IMAGE --daemon "$@"

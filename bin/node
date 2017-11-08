@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run \
+       --rm \
+       -it \
+       -e http_proxy=$http_proxy \
+       -e https_proxy=$https_proxy \
+       -v $PWD:/app \
+       -v ~/shared/.npmrc:/root/.npmrc \
+       -v ~/shared/.npm:/root/.npm \
+       -w /app \
+       node:6-alpine node "$@"
